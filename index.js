@@ -14,7 +14,7 @@ app.get('/', async(req, res) => {
     const categorias = categoriasDb.map(cat => {
         return {
             ...cat,
-            vagas: vagas.filter(vaga => vagas.categoria === cat.id)
+            vagas: vagas.filter(vaga => vaga.categoria === cat.id)
         }
     });
     res.render('home', {
@@ -22,8 +22,12 @@ app.get('/', async(req, res) => {
     });
 });
 
-app.get('/vaga', (req, res) => {
-    res.render('vaga');
+app.get('/vaga/:id', async(req, res) => {
+    const db = await dbConnection;
+    const vaga = await db.get(`SELECT * FROM vagas WHERE id = ${req.params.id}`);
+    res.render('vaga', {
+        vaga
+    });
 });
 
 const init = async() => {
