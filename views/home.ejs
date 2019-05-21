@@ -1,16 +1,14 @@
 <%- include('header') %>
     <h2>Open Roles:</h2>
+    <% categorias.forEach(categorias => { %>
     <div>
-        <h3>Engeneering Team</h3>
+        <h3><%- categorias.categoria %></h3>
         <ul>
-            <li><a href="vaga">FullStack Developer (Remote)</a></li>
+            <% categorias.vagas.forEach( vaga => { %> 
+                <li><a href="vaga"><%- vaga.titulo %></a></li>
+            <% }) %>
         </ul>
     </div>
-        <div>
-        <h3>Marketing Team</h3>
-        <ul>
-            <li>Digital Marketing (San Francisco)</li>
-        </ul>
-    </div>
+    <% }) %>
 <%- include('footer') %>
 
